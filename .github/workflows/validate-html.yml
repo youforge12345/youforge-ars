@@ -1,0 +1,72 @@
+# Runs basic sanity checks on index.html before anything gets deployed —
+# catches unbalanced tags or JavaScript syntax errors early, on every
+# push and pull request. This does NOT deploy anything; it's a safety
+# check that runs alongside the deploy workflows.
+
+name: Validate index.html
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check <div> / <script> / <style> tag balance
+        run: |
+          node -e "
+            const fs = require('fs');
+            const html = fs.readFileSync('index.html', 'utf8');
+            const pairs = [
+              ['<div', '</div>'],
+              ['<script', '</script>'],
+              ['<style', '</style>']
+            ];
+            let failed = false;
+            for (const [open, close] of pairs) {
+              const openCount  = (html.match(new RegExp(open, 'g'))  || []).length;
+              const closeCount = (html.match(new RegExp(close, 'g')) || []).length;
+              const status = openCount === closeCount ? 'OK' : 'MISMATCH';
+              if (status === 'MISMATCH') failed = true;
+              console.log(\`\${open} / \${close}: \${openCount} / \${closeCount} -> \${status}\`);
+            }
+            if (failed) {
+              console.error('Tag balance check failed.');
+              process.exit(1);
+            }
+          "
+
+      - name: Check inline <script> blocks for JS syntax errors
+        run: |
+          node -e "
+            const fs = require('fs');
+            const html = fs.readFileSync('index.html', 'utf8');
+            const scriptRegex = /<script(?![^>]*type=[\"']module[\"'])[^>]*>([\s\S]*?)<\/script>/g;
+            let m, i = 0, errors = 0;
+            while ((m = scriptRegex.exec(html)) !== null) {
+              i++;
+              const code = m[1];
+              if (!code.trim()) continue;
+              try {
+                new Function(code);
+              } catch (e) {
+                errors++;
+                console.error(\`Script block #\${i} ERROR: \${e.message}\`);
+              }
+            }
+            console.log(\`Checked \${i} script blocks, \${errors} errors\`);
+            if (errors > 0) process.exit(1);
+          "
