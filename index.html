@@ -366,6 +366,17 @@
     font-family:'Sora',sans-serif; font-weight:700; font-size:21px; margin:0; letter-spacing:0.2px;
   }
   .brand .sub{font-size:12.5px; color:var(--text-2); margin-top:2px; letter-spacing:0.3px;}
+  .brand .sub-strategy{
+    font-weight:700; color:var(--gold-1);
+    display:inline-block; margin-top:6px;
+    padding:3px 11px; border-radius:7px;
+    background:rgba(212,175,90,0.12);
+    border:1px solid rgba(212,175,90,0.28);
+    letter-spacing:0.2px;
+  }
+  body.theme-light .brand .sub-strategy{
+    background:rgba(184,134,59,0.12); border-color:rgba(184,134,59,0.32);
+  }
   .head-tag{
     font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--gold-1);
     border:1px solid var(--panel-border); padding:7px 13px; border-radius:100px;
@@ -3139,18 +3150,9 @@ function yfCloudPushAdminData(){
       <span></span><span></span><span></span>
     </button>
     <div class="brand">
-      <div class="mark">
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="15" width="3.4" height="8" rx="1" fill="#1a1305"/>
-          <rect x="9.3" y="10" width="3.4" height="13" rx="1" fill="#1a1305"/>
-          <rect x="15.6" y="13" width="3.4" height="10" rx="1" fill="#1a1305"/>
-          <path d="M3 11.5L9.5 6L14.5 9.5L22.5 3" stroke="#1a1305" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M17.5 3H22.5V8" stroke="#1a1305" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
       <div>
         <h1>YouForge Trade Manager</h1>
-        <div class="sub">Strategy: 3 Wins From 12 Trades</div>
+        <div class="sub sub-strategy">Strategy: 3 Wins From 12 Trades</div>
         <div class="sub" style="margin-top:2px;">Smart Money Management • Automatic Trade Sizing • Risk Control</div>
         <div class="sub" id="disclaimerHead" style="font-size:11px; margin-top:5px; color:var(--text-2);">⚠ For educational use only — not financial advice. Trading involves risk of loss.</div>
       </div>
