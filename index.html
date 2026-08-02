@@ -181,6 +181,34 @@
   body.theme-light .dw-modal-footer{ border-top-color:rgba(30,22,10,0.1) !important; }
   body.theme-light tbody td{ border-bottom-color:rgba(30,22,10,0.08) !important; }
 
+  /* ===== Light theme: core structural chrome that was hardcoded dark
+     regardless of theme (sidebar, bottom nav, analytics panel, form
+     fields, dropdown menus) — these are visible constantly, not
+     transient overlays, so they must follow the light palette too. ===== */
+  body.theme-light .app-sidebar{
+    background:rgba(255,253,248,0.92) !important;
+    border-right-color:rgba(168,124,42,0.18) !important;
+    box-shadow:4px 0 30px -10px rgba(120,90,30,0.15);
+  }
+  body.theme-light .mobile-bottom-nav{
+    background:rgba(255,253,248,0.95) !important;
+    border-top-color:rgba(168,124,42,0.18) !important;
+  }
+  body.theme-light .perf-panel{
+    background:rgba(255,255,255,0.7) !important;
+    border-color:rgba(168,124,42,0.2) !important;
+    box-shadow:0 1px 0 rgba(255,255,255,0.75) inset, 0 0 0 1px rgba(168,124,42,0.1), 0 24px 48px -20px rgba(120,90,30,0.25) !important;
+  }
+  body.theme-light .txn-search,
+  body.theme-light .txn-filter-select,
+  body.theme-light .dw-field input,
+  body.theme-light .dw-field select,
+  body.theme-light .dw-field textarea{
+    background:rgba(255,255,255,0.8) !important;
+    border-color:rgba(168,124,42,0.22) !important;
+    color:#241d0f !important;
+  }
+
   /* Theme transition animation */
   body, body *, body *::before, body *::after {
     transition-property: background-color, border-color, color, box-shadow, background;
