@@ -1,7 +1,7 @@
 {
-  "name": "YouForge Auto Recovery 3X12",
-  "short_name": "YouForge 3X12",
-  "description": "Adaptive Capital Management • Smart Stake Calculator • 3 Wins in 12 Trades",
+  "name": "YouForge Trade Manager",
+  "short_name": "YouForge TM",
+  "description": "Strategy: 3 Wins From 12 Trades — Smart Money Management • Automatic Trade Sizing • Risk Control",
   "id": "/",
   "start_url": "/?source=pwa",
   "scope": "/",
