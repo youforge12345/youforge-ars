@@ -2318,7 +2318,6 @@
 
   <p class="lg-footer-text" id="toSignupText">Don't have an account? <a href="#" class="lg-link" id="toSignupLink">Create one</a></p>
   <p class="lg-footer-text" id="toLoginText" style="display:none;">Already have an account? <a href="#" class="lg-link" id="toLoginLink">Sign In</a></p>
-  <p class="lg-footer-text"><a href="https://your-website.com" class="lg-link" target="_blank" rel="noopener">Visit our website</a></p>
 </div>
 </div>
 
@@ -2717,7 +2716,7 @@ function yfCloudPushAdminData(){
           if(existing.status === 'pending'){
             yfAuth.signOut();
             if(errorBox){
-              errorBox.textContent = 'Your account is still pending admin approval. Please check back later.';
+              errorBox.textContent = 'Your account is waiting for admin approval.';
               errorBox.classList.add('show');
             }
             if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'Sign In'; }
@@ -2796,6 +2795,10 @@ function yfCloudPushAdminData(){
             try{
               localStorage.removeItem('yf_login_session_v1');
               sessionStorage.removeItem('yf_login_session_v1');
+              sessionStorage.setItem('yf_force_logout_msg_v1',
+                data.status === 'pending'
+                  ? 'Your account is waiting for admin approval.'
+                  : 'Your account request was rejected. Please contact your administrator.');
             }catch(e){}
             location.reload();
             return;
@@ -3047,7 +3050,7 @@ function yfCloudPushAdminData(){
           signupBtn.textContent = 'Create Account';
           signupForm.reset();
           showLoginView();
-          errorBox.textContent = 'Account request submitted! An admin needs to approve it before you can sign in.';
+          errorBox.textContent = 'Your account request has been submitted. Please wait for admin approval before logging in.';
           errorBox.classList.add('show');
         }).catch(function(err){
           signupBtn.disabled = false;
